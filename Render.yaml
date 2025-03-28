@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: pronunciation-webapp
+    runtime: python
+    repo: https://github.com/VenkateshJatroth/pronunciation-webapp
+    plan: free
+    envVars:
+      - key: CARGO_HOME
+        sync: false
+    region: oregon
+    buildCommand: python3 -m venv .venv && source .venv/bin/activate && python3 -m pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    domains:
+      - pronounceit.com
+      - www.pronounceit.com
+    pythonVersion: 3.10 # Or your desired version
+version: "1"
